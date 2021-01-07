@@ -9,7 +9,7 @@
 ## 安装
 
 `go get -u github.com/liyoung1992/wechatpay`
-
+go mod init github.com/luoiori/wechatpay-go
 
 ## 帮助
 
