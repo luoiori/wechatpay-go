@@ -14,10 +14,10 @@ type Base struct {
 }
 
 type Amount struct {
-	total int `json:"total"`
+	Total int `json:"total"`
 }
 type Payer struct {
-	openid string `json:"openid"`
+	Openid string `json:"openid"`
 }
 
 //统一下单请求参数
