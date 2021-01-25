@@ -1,7 +1,7 @@
 package wechatpay
 
 const (
-	UNIT_ORDER_URL   = "https://api.mch.weixin.qq.com/pay/unifiedorder"
+	UNIT_ORDER_URL   = "https://api.mch.weixin.qq.com/v3/pay/transactions/jsapi"
 	REFUND_URL       = "https://api.mch.weixin.qq.com/secapi/pay/refund"
 	REFUND_QUERY_URL = "https://api.mch.weixin.qq.com/pay/refundquery"
 )
@@ -13,32 +13,28 @@ type Base struct {
 	Sign     string `xml:"sign"`
 }
 
+type Amount struct {
+	total int `json:"total"`
+}
+type Payer struct {
+	openid string `json:"openid"`
+}
+
 //统一下单请求参数
 type UnitOrder struct {
-	Base
-	Body           string `xml:"body"`
-	NotifyUrl      string `xml:"notify_url"`
-	TradeType      string `xml:"trade_type"`
-	SpbillCreateIp string `xml:"spbill_create_ip"`
-	TotalFee       int    `xml:"total_fee"`
-	OutTradeNo     string `xml:"out_trade_no"`
-	SceneInfo      string `xml:"scene_info"`
-	FeeType        string `xml:"fee_type"`
-	Openid         string `xml:"openid"`
-	Referer        string
+	Appid        string `json:"appid"`
+	Mchid        string `json:"mchid"`
+	Description  string `json:"description"`
+	Out_trade_no string `json:"out_trade_no"`
+	Notify_url   string `json:"notify_url"`
+	Attach       string `json:"attach"`
+	Amount
+	Payer
 }
 
 //统一下单返回参数
 type UnifyOrderResult struct {
-	Base
-	ReturnCode string `xml:"return_code"`
-	ReturnMsg  string `xml:"return_msg"`
-	Attach     string `xml:"attach"`
-	ResultCode string `xml:"result_code"`
-	PrepayId   string `xml:"prepay_id"`
-	TradeType  string `xml:"trade_type"`
-	CodeUrl    string `xml:"code_url"`
-	MwebUrl    string `xml:"mweb_url"`
+	Prepay_id string `json:"prepay_id"`
 }
 
 //订单查询
